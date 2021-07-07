@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+import requests
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -39,11 +40,10 @@ def index():
     return jsonify(WeatherData.query.all())
 
 
-# @app.route('/api/weatherdata/<str:name>/', methods=['POST'])
-# def city(name):
-#     # TODO: get random city and display some weather info for it\
-#     req = requests.get('')
-#     pass
+@app.route('/api/weatherdata/city/display', methods=['POST'])
+def city():
+    req = requests.get('http://host.docker.internal:8000/api/city')
+    return jsonify(req.json())
 
 
 if __name__ == '__main__':
