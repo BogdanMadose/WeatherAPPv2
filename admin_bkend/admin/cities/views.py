@@ -72,10 +72,16 @@ class CitiesViewSet(viewsets.ViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class CitiesAPIView(APIView):
-    def get(self, _):  # /api/city
-        cities = Cities.objects.all()
-        city = random.choice(cities)
+class WeatherAPIView(APIView):
+    def get(self, _, name=None):  # /api/city
+        weather_data = WeatherData.objects.all()
+        cities = Cities.objects.get(name=name)
+        weather_data_s = random.choice(weather_data)
         return Response({
-            'name': city.name
+            'weather_id': weather_data_s.id,
+            'city_id': cities.id,
+            'name': cities.name,
+            'temp': weather_data_s.temp,
+            'wind_speed': weather_data_s.wind_speed,
+            'pressure': weather_data_s.pressure
         })

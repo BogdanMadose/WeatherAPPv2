@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import WeatherDataViewSet, CitiesViewSet, CitiesAPIView
+from .views import WeatherDataViewSet, CitiesViewSet, WeatherAPIView
 
 urlpatterns = [
     path('weatherdata', WeatherDataViewSet.as_view({
@@ -21,5 +21,5 @@ urlpatterns = [
         'put': 'update',
         'delete': 'destroy'
     })),
-    path('city', CitiesAPIView.as_view())
+    path('city/<str:name>', WeatherAPIView.as_view())
 ]
