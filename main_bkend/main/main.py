@@ -46,7 +46,7 @@ def index():
 
 @app.route('/api/weatherdata/<string:name>/display', methods=['POST'])
 def get_weather(name):
-    req = requests.get(f"http://host.docker.internal:8000/api/city/" + name)
+    req = requests.get("http://host.docker.internal:8000/api/city/" + name)
     data = req.json()
 
     try:
